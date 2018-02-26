@@ -10,16 +10,53 @@ function setCart(c) {
 }
 
 function addToCart(item) {
- // write your code here
+var itemPrice = Math.floor(Math.random() * 100 + 1);
+cart.push ({[item]: itemPrice});
+console.log (`${item} has been added to your cart.`);
+return cart;
 }
 
 function viewCart() {
-  // write your code here
+  const l = cart.length;
+  if (!l) {
+    return console.log("Your shopping cart is empty.");
+  }
+
+  var itemsAndPrices = []
+
+  for (var i = 0; i < l; i++) {
+    var itemWithPrice = cart[i];
+    var item = Object.keys(itemWithPrice)[0];
+    var price = itemWithPrice[item];
+    itemsAndPrices.push (`${item} at $${price}`);
 }
 
-function total() {
-  // write your code here
+switch (itemsAndPrices.length) {
+  case 1:
+    break;
+  case 2:
+  itemsAndPrices = itemsAndPrices.join(" and ");
+    break;
+
+  default:
+  itemsAndPrices[l-1] = "and ".concat(itemsAndPrices[l-1]);
+  itemsAndPrices = itemsAndPrices.join(", ");
 }
+console.log(`In your cart, you have ${itemsAndPrices}.`);
+}
+
+
+function total() {
+
+  var t = 0
+  for (var i = 0, l = cart.length; i < l; i++) {
+    for (var item in cart[i]) {
+      t += cart[i][item]
+    }
+  }
+  return t
+}
+
 
 function removeFromCart(item) {
   // write your code here
